@@ -1,0 +1,33 @@
+<launch>
+  <!-- Robot parametreleri -->
+  <arg name="model" default="burger"/>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.4"/> <!-- Büyük robot için z ekseni yükseltildi -->
+
+  <!-- Fiziksel parametreler (wheel_radius, wheel_separation) -->
+  <rosparam file="$(find turtlebot3_bringup)/param/robot.yaml" command="load"/>
+  <rosparam file="$(find turtlebot3_bringup)/config/giant_base_controller.yaml" command="load"/>
+
+
+  <!-- Robot tanımı (xacro dosyasından URDF oluşturuluyor) -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro '$(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro'" />
+
+  <!-- World dosyasını yükle -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find my_worlds)/worlds/oda4.world"/>
+    <arg name="verbose" value="true"/>
+  </include>
+
+  <!-- Robotu Gazebo'ya yerleştir -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-param robot_description -urdf -model turtlebot3 
+              -x $(arg x) -y $(arg y) -z $(arg z)" />
+
+  <!-- Kontrolcüler -->
+  <node pkg="controller_manager" type="spawner" name="controller_spawner"
+        args="joint_state_controller
+              mobile_base_controller" />
+</launch>
+

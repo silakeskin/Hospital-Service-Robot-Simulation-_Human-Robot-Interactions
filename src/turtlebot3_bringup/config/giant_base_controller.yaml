@@ -1,0 +1,31 @@
+mobile_base_controller:
+  type: "diff_drive_controller/DiffDriveController"
+  left_wheel: 'wheel_left_joint'
+  right_wheel: 'wheel_right_joint'
+  wheel_separation: 0.64  # 4x
+  wheel_radius: 0.132     # 4x
+
+  publish_rate: 50.0
+  pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.0, 0.0, 0.001]
+  twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.0, 0.0, 0.001]
+
+  cmd_vel_timeout: 0.25
+  enable_odom_tf: true
+
+  linear:
+    x:
+      has_velocity_limits    : true
+      max_velocity           : 5.0   # Daha hızlı hareket etsin
+      min_velocity           : -5.0
+      has_acceleration_limits: true
+      max_acceleration       : 3.0
+      min_acceleration       : -3.0
+
+  angular:
+    z:
+      has_velocity_limits    : true
+      max_velocity           : 8.0
+      min_velocity           : -8.0
+      has_acceleration_limits: true
+      max_acceleration       : 4.0
+      min_acceleration       : -4.0
