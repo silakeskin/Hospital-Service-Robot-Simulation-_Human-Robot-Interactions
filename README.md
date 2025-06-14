@@ -1,5 +1,6 @@
 # Hospital-Service-Robot-Simulation-_Human-Robot-Interactions
-ROS Noetic + Gazebo 11 simulation of a 4x scaled TurtleBot3 in a custom hospital world with keyboard teleoperation and controller customization.
+ROS Noetic + Gazebo 11 simulation of a 4x scaled TurtleBot3 in a custom hospital world with keyboard teleoperation and controller customization. 
+Link for the youtube video: https://youtu.be/jeRI8cymcJ8
 
 
 This project simulates a **4x scaled TurtleBot3** in a custom Gazebo hospital environment (`oda4_with_keyboard_control.world`).
